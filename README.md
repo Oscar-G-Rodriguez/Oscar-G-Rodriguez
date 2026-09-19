@@ -1,5 +1,7 @@
-## Hi there 👋
-
+## Hello!
+I'm a computer science student studying at the University of Florida. I love working with anything data science and ML related.
+- I’m currently working on building ML projects of all varieties
+- I’m currently learning how to improve my skills in Python, applied machine learning, and data pipelines.
 <!--
 **Oscar-G-Rodriguez/Oscar-G-Rodriguez** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
 
