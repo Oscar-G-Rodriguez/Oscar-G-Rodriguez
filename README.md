@@ -6,9 +6,9 @@ Hi, I'm Oscar. I'm a freshman studying computer science at the University of Flo
 
 ### [SeekR](https://github.com/Hemanka/Shellhacks-X)
 
-SeekR is the project I feel best represents my interests right now. I worked on it with a team to help blind users find objects and navigate a room using a phone camera and voice guidance. We chose vision models to make the experience more accessible than a setup that needs dedicated sensors.
+SeekR is the project I feel best represents my interests right now. I worked on it with a team to help blind users find objects and navigate a room using a phone camera and voice guidance. We chose vision models so the person navigating can use a phone camera without having to carry or set up a separate sensor device. The phone captures the view and speaks the guidance, while a Windows dashboard runs the analysis.
 
-A user says what they're looking for, and SeekR uses the camera view to identify the target and choose a short movement instruction. The phone speaks that instruction and sends a new view before the next step. I like how this project brings vision and speech models together with navigation logic for one goal. During testing, I used SeekR to navigate classrooms and living rooms, move around obstacles, and reach the objects I was looking for.
+A user says what they're looking for, and Gemini examines the camera view to identify the target and its position. A segmentation model marks likely walkable areas and obstacles. SeekR uses those model outputs to choose a short movement instruction, which the phone speaks before sending a new view for the next step. During testing, I used SeekR to navigate classrooms and living rooms, move around obstacles, and reach the objects I was looking for.
 
 ### [ROMULUS](https://github.com/Oscar-G-Rodriguez/ROMULUS)
 
