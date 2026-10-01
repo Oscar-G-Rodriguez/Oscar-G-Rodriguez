@@ -6,7 +6,7 @@ Hi, I'm Oscar. I'm a freshman studying computer science at the University of Flo
 
 ### [SeekR](https://github.com/Hemanka/Shellhacks-X)
 
-SeekR is the project I feel best represents my interests right now. I worked on it with a team as a prototype for helping blind users find objects using a phone camera and voice guidance. We chose vision models because they make the project more accessible than dedicated sensors. The system still has to judge nearby obstacles from two-dimensional images, and it needs physical testing.
+SeekR is the project I feel best represents my interests right now. I worked on it with a team as a prototype for helping blind users find objects using a phone camera and voice guidance. We chose vision models because they make the project more accessible than dedicated sensors. I used SeekR to navigate classrooms and living rooms, avoid obstacles, and reach the objects I was looking for. Its guidance still depends on estimates from two-dimensional images.
 
 ### [ROMULUS](https://github.com/Oscar-G-Rodriguez/ROMULUS)
 
