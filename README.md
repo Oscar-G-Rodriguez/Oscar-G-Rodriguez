@@ -18,4 +18,4 @@ I like making a system's inputs, decisions, and limitations visible. My projects
 - Data pipelines that preserve source and quality information
 - Software that makes complex behavior easier to inspect
 
-The linked repositories have code and setup guidance. The larger case studies also document their validation and limitations. My portfolio website is in progress.
+The repositories above include the code, setup instructions, and current limitations. My portfolio website is in progress.
