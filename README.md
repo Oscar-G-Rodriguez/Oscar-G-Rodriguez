@@ -3,9 +3,9 @@
 ![Oscar Rodriguez: Machine learning, AI applications, University of Florida](https://capsule-render.vercel.app/api?type=rect&color=0f172a&height=180&text=Oscar%20Rodriguez&fontColor=f8fafc&fontSize=46&fontAlignY=40&desc=Machine%20Learning%20%7C%20AI%20Applications%20%7C%20University%20of%20Florida&descSize=17&descAlignY=66)
 
 <p align="center">
-  <a href="#skills">Skills & direction</a> &nbsp;·&nbsp;
-  <a href="#projects">Projects</a> &nbsp;·&nbsp;
-  <a href="#roles">Current roles</a> &nbsp;·&nbsp;
+  <a href="#skills-and-direction">Skills & direction</a> &nbsp;·&nbsp;
+  <a href="#featured-projects">Projects</a> &nbsp;·&nbsp;
+  <a href="#current-roles-at-uf">Current roles</a> &nbsp;·&nbsp;
   <a href="https://www.linkedin.com/in/oscar-g-rodriguez/">LinkedIn</a> &nbsp;·&nbsp;
   <a href="https://github.com/Oscar-G-Rodriguez?tab=repositories">All repositories</a>
 </p>
@@ -117,4 +117,4 @@ I wanted people to be able to trace a result back to the underlying data and see
 
 ---
 
-[Back to top](#top) &nbsp;·&nbsp; [Browse all repositories](https://github.com/Oscar-G-Rodriguez?tab=repositories) &nbsp;·&nbsp; [Connect on LinkedIn](https://www.linkedin.com/in/oscar-g-rodriguez/)
+[Back to top](#start-of-content) &nbsp;·&nbsp; [Browse all repositories](https://github.com/Oscar-G-Rodriguez?tab=repositories) &nbsp;·&nbsp; [Connect on LinkedIn](https://www.linkedin.com/in/oscar-g-rodriguez/)
