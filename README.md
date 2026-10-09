@@ -31,7 +31,7 @@ Hi, I'm Oscar. I'm a freshman studying computer science at the University of Flo
 | **Speech and media** | ElevenLabs, faster-whisper, FFmpeg |
 | **GPU development** | CUDA kernels, PyTorch C++ extensions, PyTorch Profiler, numerical validation, and NVIDIA Compute Sanitizer |
 | **Testing** | pytest, unittest, JUnit, Mockito, Spring MockMvc, and Playwright |
-| **Development tools** | Git, uv, Gradle, Vite, Linux, and WSL |
+| **Development tools** | Git, uv, Gradle, Vite, Linux, Ubuntu/WSL 2, and Docker |
 
 Recently, I've been using PyTorch and Transformers to evaluate a local Qwen agent in [Factorio Agent Evals](https://github.com/Oscar-G-Rodriguez/factorio-agent-evals). I also implemented and tested a C++/CUDA RMSNorm operator for that project. My Java backend work covers request validation, concurrent updates, and HTTP tests. I enjoy working through the whole application, especially the data and ML.
 
@@ -46,19 +46,22 @@ I'd like to work on frontier models in any way I can. I want to keep building us
 | **Factorio Agent Evals** | Local Qwen agent evaluation, factory-maintenance traces, and a C++/CUDA RMSNorm benchmark | [Overview](#factorio-agent-evals) · [Results](https://github.com/Oscar-G-Rodriguez/factorio-agent-evals/blob/main/outputs/A04%20-%20Maintenance%20-%20Results.md) |
 | **SeekR** | Phone-camera object finding and voice-guided navigation | [Overview](#seekr) · [Code](https://github.com/Hemanka/Shellhacks-X) |
 | **ROMULUS** | Strategy comparisons, ML forecasts, and the evidence behind portfolio decisions | [Overview](#romulus) · [Validation](https://github.com/Oscar-G-Rodriguez/ROMULUS/blob/main/VALIDATION_REPORT.md) |
+| **Web Portfolio & SiteNaviAI** | Linux-hosted portfolio and a source-citing guide to its projects and linked code | [Overview](#web-portfolio-and-sitenaviai) · [Website](https://oscargr.me) |
 | **Florida Policy Advisor** | Florida indicators, data quality, and traceable policy comparisons | [Overview](#florida-policy-advisor) · [Evidence](https://github.com/Oscar-G-Rodriguez/florida_policy_advisor/blob/main/portfolio_evidence/README.md) |
 
 <a name="factorio-agent-evals"></a>
 
 ### Factorio Agent Evals
 
-**Agent evaluation · PyTorch · Transformers · C++/CUDA**
+**Agent evaluation · PyTorch · Transformers · C++/CUDA · Ubuntu/WSL 2 · Docker**
 
-I built Factorio Agent Evals to test whether a local language model could keep a small Factorio factory producing iron plates. Qwen3-4B-Instruct-2507 runs locally through PyTorch and Hugging Face Transformers. A Python controller gives it the current factory state and allowed tools, validates its chosen JSON action, and records what happens. I use those traces to inspect where the agent misses fuel or storage decisions. A scripted controller sustained production for 20 game minutes; Qwen's episode ended after 11, which gave me a concrete failure to investigate.
+I built Factorio Agent Evals to test whether a local language model could keep a small Factorio factory producing iron plates. Qwen3-4B-Instruct-2507 runs locally through PyTorch and Transformers. A Python controller presents the factory state and allowed tools, validates each JSON action, advances the game, and saves the trace. On a maintenance fixture that the scripted controller sustained for 20 game minutes, Qwen failed after 11. The trace showed missed storage and fuel decisions, giving me specific behaviors to test rather than only a final score.
 
-I also profiled the model and implemented an RMSNorm operator with a C++ binding and a CUDA kernel. The reviewed implementation passed 25 numerical correctness cases and four NVIDIA Compute Sanitizer checks. In standalone operator benchmarks on captured inputs, it ran 5.21× faster for the prompt-sized operation and 4.80× faster for the single-token operation than the installed eager CUDA reference. The repository includes the methods, timing samples, source hashes, and original agent traces.
+I used those observations to build controlled fixtures and collect 320 executed training actions for QLoRA fine tuning. On two validation factories, the selected second-round adapter produced 746 plates versus 680 for the baseline (+9.7%) and made zero failed actions versus eight. Both reached the 20-minute cap.
 
-[Repository](https://github.com/Oscar-G-Rodriguez/factorio-agent-evals) &nbsp;·&nbsp; [Agent results](https://github.com/Oscar-G-Rodriguez/factorio-agent-evals/blob/main/outputs/A04%20-%20Maintenance%20-%20Results.md) &nbsp;·&nbsp; [CUDA benchmark](https://github.com/Oscar-G-Rodriguez/factorio-agent-evals/blob/main/outputs/K01%20-%20RMSNorm%20-%20Reviewed%20Benchmark.md)
+I also profiled inference and built a C++/CUDA RMSNorm operator. It passed 25 numerical correctness cases and four NVIDIA Compute Sanitizer checks. Standalone operator tests were 5.21× faster on a captured prompt-sized input and 4.80× faster on a single-token input than the installed eager CUDA reference. More importantly for model use, an opt-in integration kept identical greedy tokens and actions across five saved prompts while improving paired end-to-end eager/custom median response time by 1.11–1.17×. I run the Factorio server in Docker and the model and CUDA work in Ubuntu on WSL 2, keeping the game and inference environments separate. The repository preserves the methods, timing samples, source hashes, and agent traces.
+
+[Repository](https://github.com/Oscar-G-Rodriguez/factorio-agent-evals) &nbsp;·&nbsp; [Agent results](https://github.com/Oscar-G-Rodriguez/factorio-agent-evals/blob/main/outputs/A04%20-%20Maintenance%20-%20Results.md) &nbsp;·&nbsp; [Fine tuning](https://github.com/Oscar-G-Rodriguez/factorio-agent-evals/blob/main/outputs/A06%20-%20Qwen%20Fine%20Tuning%20-%20Three%20Round%20Results%2020261007T140230Z.md) &nbsp;·&nbsp; [Integrated CUDA results](https://github.com/Oscar-G-Rodriguez/factorio-agent-evals/blob/main/outputs/K02%20-%20RMSNorm%20-%20Integrated%20Inference%20Results.md)
 
 ---
 
@@ -68,9 +71,9 @@ I also profiled the model and implemented an RMSNorm operator with a C++ binding
 
 **Computer vision · Accessibility · Gemini · SegFormer**
 
-I worked on SeekR with a team to help blind users find objects and navigate a room using a phone camera and voice guidance. It's the project I feel best represents my interests right now. We chose vision models so users could navigate with a phone without carrying or setting up a separate sensor. The phone captures the view and speaks the guidance. A Windows dashboard runs the analysis.
+I worked on SeekR with a team to help blind users find objects and navigate a room using a phone camera and voice guidance. We chose vision models so users could navigate with a phone without carrying or setting up a separate sensor. The phone captures the view and speaks the guidance. A Windows dashboard runs the analysis.
 
-After a user says what they're looking for, Gemini examines the camera view to identify the target and its position. A segmentation model marks likely walkable areas and obstacles. SeekR uses those outputs to choose a short movement instruction, which the phone reads aloud before sending another view for the next step. I tested it in classrooms and living rooms, where I used it to move around obstacles and reach the objects I was looking for.
+After a user says what they're looking for, Gemini examines the camera view to identify the target and its position. I focused mainly on the SegFormer floor masks, grid routing, and FastAPI connection between vision and navigation, while also contributing to the rest of the system. SeekR uses the visual outputs to choose a short movement instruction, which the phone reads aloud before sending another view for the next step. I tested it in classrooms and living rooms, where I used it to move around obstacles and reach the objects I was looking for.
 
 [Repository](https://github.com/Hemanka/Shellhacks-X)
 
@@ -87,6 +90,20 @@ ROMULUS is a local financial research app I built to compare trading strategies 
 The app also uses ML to forecast returns and volatility. In the desktop interface, I can inspect those forecasts, strategy rankings, portfolio changes, and the evidence behind each selection. I wanted to be able to follow how each result was reached. The [validation report](https://github.com/Oscar-G-Rodriguez/ROMULUS/blob/main/VALIDATION_REPORT.md) shows how I checked the backtester and its model outputs.
 
 [Repository](https://github.com/Oscar-G-Rodriguez/ROMULUS) &nbsp;·&nbsp; [Validation report](https://github.com/Oscar-G-Rodriguez/ROMULUS/blob/main/VALIDATION_REPORT.md)
+
+---
+
+<a name="web-portfolio-and-sitenaviai"></a>
+
+### Web Portfolio & SiteNaviAI
+
+**Next.js · TypeScript · Fastify · Playwright · SQLite · Linux · Cloudflare**
+
+I built a portfolio at [oscargr.me](https://oscargr.me) to make my projects, roles, and their underlying evidence easier to explore. A frozen Next.js static build runs on my Linux laptop and reaches the public domain through a Cloudflare Tunnel. I keep the public release separate from the working site so I can review content and test a build before serving it.
+
+SiteNaviAI is the companion retrieval-augmented guide. In its owner-only preview, the Fastify backend reads the served pages for each question, follows GitHub repositories linked from those pages, and retrieves relevant public code at a specific commit. It checks the answer's claims and citations before returning source-linked guidance. SQLite holds sessions and conversations, while the website and repositories supply the facts. The public website is live; visitor chat is still disabled while its saved-chat and privacy checks are completed.
+
+[Website](https://oscargr.me)
 
 ---
 
